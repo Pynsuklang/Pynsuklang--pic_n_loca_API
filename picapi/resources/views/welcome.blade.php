@@ -128,5 +128,11 @@
                 </div>
             </div>
         </div>
+        <form method="POST" action="{{ route('user-login') }}">
+            @csrf
+            <input type="text" name="email">
+            <input type="password" name="password">
+            <input type="submit">
+        </form>
     </body>
 </html>

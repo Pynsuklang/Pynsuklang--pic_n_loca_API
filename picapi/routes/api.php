@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/user-login', [App\Http\Controllers\PicDBController::class, 'LoginAcc'])->name('user-login');
+Route::post('/create-account', [App\Http\Controllers\PicDBController::class, 'createAcc'])->name('create-account');
+//Route::post('user', 'UserController@store')->name('user');
