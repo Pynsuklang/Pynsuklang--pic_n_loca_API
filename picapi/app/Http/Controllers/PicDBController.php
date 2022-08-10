@@ -17,60 +17,98 @@ class PicDBController extends Controller
     }
     public function createAcc(Request $request)//create account
     {
-        $acc_avl = 0; //0 is for not available and 1 is for already available
-        $myusnm = $request->usnm;
-        $name = $request->name;
-        $pwd = $request->pwd;
-        $hashedPassword = Hash::make($pwd);
-        //return response()->json($hashedPassword, 200);
-        $cnt_user = ManageUser::where('user_email', $myusnm)->count();
-        if ($cnt_user>0) {
-            $acc_avl = 1;
-        } else {
-            $uservals = new ManageUser();
-            $uservals->user_name = $name;
-            $uservals->user_email = $myusnm;
-            $uservals->user_password = $hashedPassword;
-            $uservals->save();
-            // User::create([
-            //     'name' => $name,
-            //     'email' => $myusnm,
-            //     'password' => Hash::make($pwd),
-            // ]);
-            $acc_avl = 0;
+        $acc_avl = 3;
+        try
+        {
+            $acc_avl = 0; //0 is for not available and 1 is for already available
+            $myusnm = $request->usnm;
+            $name = $request->name;
+            $pwd = $request->pwd;
+            $hashedPassword = Hash::make($pwd);
+            $cnt_user = ManageUser::where('user_email', $myusnm)->count();
+            if ($cnt_user>0) {
+                $acc_avl = 1;
+            } else {
+                $uservals = new ManageUser();
+                $uservals->user_name = $name;
+                $uservals->user_email = $myusnm;
+                $uservals->user_password = $hashedPassword;
+                $uservals->save();
+                $acc_avl = 0;
+            }
+            return response()->json($acc_avl, 200);
         }
-        return response()->json($acc_avl, 200);
+        catch (\Throwable $th)
+        {
+            $acc_avl = 3;
+            return response()->json($acc_avl, 200);
+        }
     }
     public function LoginAcc(Request $request)//create account
     {
-        //1 for granted access and 0 is for denied access
         $access = 3;
-        $myusnm = $request->email;
-        $pwd = $request->password;
-        $cnt_user = ManageUser::where('user_email', $myusnm)
-        ->get(['user_password']);
-        if (count($cnt_user) == 1)
+        try
         {
-            $hashedPassword = $cnt_user[0]->user_password;
-            if(Hash::check($pwd, $hashedPassword))
+            $myusnm = $request->email;
+            $pwd = $request->password;
+            $cnt_user = ManageUser::where('user_email', $myusnm)
+            ->get(['user_password']);
+            if (count($cnt_user) == 1)
             {
-                $access = 0;
+                $hashedPassword = $cnt_user[0]->user_password;
+                if(Hash::check($pwd, $hashedPassword))
+                {
+                    $access = 0;
+                }
+                else
+                {
+                    $access = 1;
+                }
             }
-            else
+            else if (count($cnt_user) != 1)//account not available
             {
                 $access = 1;
             }
+            return response()->json($access, 200);
         }
-        else if (count($cnt_user) != 1)//account not available
+        catch (\Exception $e) {
+            $access = 3;
+            return response()->json($access, 200);
+        }
+        //1 for granted access and 0 is for denied access
+    }
+
+    public function ForgotPwd(Request $request)//create account
+    {
+        $access = 3;
+        try
         {
-            $access = 1;
+            $myusnm = $request->email;
+            $cntr = ManageUser::where('user_email', $myusnm)->count();
+            if ($cntr > 0) {
+            $details = [
+                'title' => 'Password Reset Link',
+                'body' => 'This is for testing email using smtp'
+            ];
+
+            \Mail::to($myusnm)->send(new \App\Mail\ForgotPwdMail($details));
+                $access = 0;
+            } else {
+                $access = 1;
+            }
+            return response()->json($access, 200);
         }
-        return response()->json($access, 200);
+        catch (\Exception $e)
+        {
+            $access = 3;
+            return response()->json($access, 200);
+        }
+        //1 for granted access and 0 is for denied access
     }
 
     public function store(Request $request)//login account
     {
-
+        return response()->json('Hello', 200);
     }
 
     public function show(PicDB $picDB)
