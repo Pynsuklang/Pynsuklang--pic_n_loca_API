@@ -128,10 +128,6 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{{ route('forgot-pwd') }}">
-            @csrf
-            <input type="text" type="email" name="email">
-            <input type="submit">
-        </form>
+
     </body>
 </html>

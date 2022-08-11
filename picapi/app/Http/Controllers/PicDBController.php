@@ -7,6 +7,8 @@ use App\Models\PicDB;
 use App\Models\ManageUser;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail as FacadesMail;
+use App\Mail\ForgotPwdMail;
 
 class PicDBController extends Controller
 {
@@ -90,8 +92,8 @@ class PicDBController extends Controller
                 'title' => 'Password Reset Link',
                 'body' => 'This is for testing email using smtp'
             ];
-
-            \Mail::to($myusnm)->send(new \App\Mail\ForgotPwdMail($details));
+            //FacadesMail::to($myusnm)->send(new ForgotPwdMail($details));
+            FacadesMail::to('pynmaw@gmail.com')->send(new ForgotPwdMail($details));
                 $access = 0;
             } else {
                 $access = 1;
@@ -100,6 +102,7 @@ class PicDBController extends Controller
         }
         catch (\Exception $e)
         {
+            dd($e);
             $access = 3;
             return response()->json($access, 200);
         }
