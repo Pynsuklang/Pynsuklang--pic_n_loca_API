@@ -15,7 +15,11 @@ class CreatePicDBSTable extends Migration
     {
         Schema::create('pic_d_b_s', function (Blueprint $table) {
             $table->id();
-            
+            $table->unsignedBigInteger('userid')->nullable();
+            $table->foreign('userid')->references('id')->on('manage_users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('latitude_data')->nullable();
+            $table->string('longitude_data')->nullable();
+            $table->string('file_location')->nullable();
             $table->timestamps();
         });
     }
