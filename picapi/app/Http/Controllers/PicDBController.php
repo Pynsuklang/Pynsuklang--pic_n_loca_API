@@ -119,9 +119,11 @@ class PicDBController extends Controller
             $datas->userid = $usrid;
             $datas->file_location = $fileName1;
             $datas->save();
-            return response()->json($path2, 200);
+            $sigs = 1;
+            return response()->json($sigs, 200);
         } catch (\Throwable $th) {
-            return response()->json('Error', 200);
+            $sigs = 0;
+            return response()->json($sigs, 200);
         }
     }
 
