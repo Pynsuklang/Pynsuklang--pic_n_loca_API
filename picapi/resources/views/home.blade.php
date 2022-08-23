@@ -1,23 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.dashboard-top')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+@section('content2')
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Default Table</h5>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                        <!-- Default Table -->
+                        <table class="table">
+                            <thead>
+                                <tr>
 
-                    {{ __('You are logged in!') }}
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Latitude</th>
+                                    <th scope="col">Longitude</th>
+                                    <th scope="col">File Uploaded</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dets as $item)
+                                    <tr>
+
+                                        <td>{{ $item->user_name }}</td>
+                                        <td>{{ $item->user_email }}</td>
+                                        <td>{{ $item->latitude_data }}</td>
+                                        <td>{{ $item->longitude_data }}</td>
+                                        <td><a href="/myfiles/{{ $item->file_location }}">Click Here To Download</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection
