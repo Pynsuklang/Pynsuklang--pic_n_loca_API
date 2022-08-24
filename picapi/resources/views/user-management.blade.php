@@ -13,22 +13,21 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Latitude</th>
-                                    <th scope="col">Longitude</th>
-                                    <th scope="col">File Uploaded</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dets as $item)
+                                @foreach ($users as $item)
                                     <tr>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->user_name }}</td>
                                         <td>{{ $item->user_email }}</td>
-                                        <td>{{ $item->latitude_data }}</td>
-                                        <td>{{ $item->longitude_data }}</td>
-                                        <td><a href="/myfiles/{{ $item->file_location }}">Click Here To Download</a>
-                                        </td>
+                                        <td><button>Edit</button></td>
+                                        <td><button>Delete</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>

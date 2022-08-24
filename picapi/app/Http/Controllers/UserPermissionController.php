@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ManageUser;
+use App\Models\UserPermission;
 use Illuminate\Http\Request;
 
-class ManageUserController extends Controller
+class UserPermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class ManageUserController extends Controller
      */
     public function index()
     {
-        $users = ManageUser::all();
-        return view('user-management', ['users' => $users]);
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class ManageUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ManageUser  $manageUser
+     * @param  \App\Models\UserPermission  $userPermission
      * @return \Illuminate\Http\Response
      */
-    public function show(ManageUser $manageUser)
+    public function show(UserPermission $userPermission)
     {
         //
     }
@@ -53,10 +52,10 @@ class ManageUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ManageUser  $manageUser
+     * @param  \App\Models\UserPermission  $userPermission
      * @return \Illuminate\Http\Response
      */
-    public function edit(ManageUser $manageUser)
+    public function edit(UserPermission $userPermission)
     {
         //
     }
@@ -65,10 +64,10 @@ class ManageUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ManageUser  $manageUser
+     * @param  \App\Models\UserPermission  $userPermission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ManageUser $manageUser)
+    public function update(Request $request, UserPermission $userPermission)
     {
         //
     }
@@ -76,10 +75,10 @@ class ManageUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ManageUser  $manageUser
+     * @param  \App\Models\UserPermission  $userPermission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ManageUser $manageUser)
+    public function destroy(UserPermission $userPermission)
     {
         //
     }
