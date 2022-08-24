@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/getusers', [App\Http\Controllers\ManageUserController::class, 'index'])->name('getusers');
+Route::post('/user-permission', [App\Http\Controllers\UserPermissionController::class, 'UserPermissions'])->name('user-permission');
 Route::post('/user-login', [App\Http\Controllers\PicDBController::class, 'LoginAcc'])->name('user-login');
 Route::post('/create-account', [App\Http\Controllers\PicDBController::class, 'createAcc'])->name('create-account');
 Route::post('/forgot-pwd', [App\Http\Controllers\PicDBController::class, 'ForgotPwd'])->name('forgot-pwd');

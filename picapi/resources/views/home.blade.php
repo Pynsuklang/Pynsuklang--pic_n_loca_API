@@ -17,6 +17,7 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Latitude</th>
                                     <th scope="col">Longitude</th>
+                                    <th scope="col">Location</th>
                                     <th scope="col">File Uploaded</th>
                                 </tr>
                             </thead>
@@ -27,6 +28,9 @@
                                         <td>{{ $item->user_email }}</td>
                                         <td>{{ $item->latitude_data }}</td>
                                         <td>{{ $item->longitude_data }}</td>
+                                        <td><a href="https://maps.google.com/?q={{ $item->latitude_data }},{{ $item->longitude_data }}"
+                                                target="_blank">Get
+                                                Location</a></td>
                                         <td><a href="/myfiles/{{ $item->file_location }}">Click Here To Download</a>
                                         </td>
                                     </tr>

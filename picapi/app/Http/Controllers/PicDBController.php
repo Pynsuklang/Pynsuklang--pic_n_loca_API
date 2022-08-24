@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use App\Mail\ForgotPwdMail;
+use App\Models\UserPermission;
 
 class PicDBController extends Controller
 {
@@ -35,6 +36,10 @@ class PicDBController extends Controller
                 $uservals->user_email = $myusnm;
                 $uservals->user_password = $hashedPassword;
                 $uservals->save();
+                $permission = new UserPermission();
+                $permission->userid = $uservals->id;
+                $permission->permission_stats = -1;
+                $permission->save();
                 $acc_avl = 0;
             }
             return response()->json($acc_avl, 200);

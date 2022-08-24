@@ -14,10 +14,15 @@ class ManageUserController extends Controller
      */
     public function index()
     {
-        $users = ManageUser::all();
+        $users = ManageUser::leftJoin('user_permissions', 'manage_users.id', '=', 'user_permissions.userid')
+            ->where('user_permissions.permission_stats', -1)
+            ->get(['manage_users.id', 'manage_users.user_name', 'manage_users.user_email']);
         return view('user-management', ['users' => $users]);
     }
-
+    public function GetUserData()
+    {
+        return response()->json("OK", 200);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,9 +39,9 @@ class ManageUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
     }
 
     /**
