@@ -5,6 +5,36 @@ $(document).ready(function () {
         },
     });
 
+    $("#sel_usrs_all_enab").change(function () {
+        $(".sel_usrs_enab").prop("checked", $(this).prop("checked"));
+        if ($(this).prop("checked") == true) {
+            console.log("Checkbox is checked.");
+            var inputs = $(".sel_usrs_enab");
+            for (var i = 0; i < inputs.length; i++) {
+                checkedArray[i] = $(inputs[i]).data("id");
+            }
+        } else if ($(this).prop("checked") == false) {
+            console.log("Checkbox is unchecked.");
+            checkedArray = [];
+        }
+        console.log(checkedArray);
+    });
+
+    $("#sel_usrs_all_dis").change(function () {
+        $(".sel_usrs_dis").prop("checked", $(this).prop("checked"));
+        if ($(this).prop("checked") == true) {
+            console.log("Checkbox is checked.");
+            var inputs = $(".sel_usrs_dis");
+            for (var i = 0; i < inputs.length; i++) {
+                checkedArray[i] = $(inputs[i]).data("id");
+            }
+        } else if ($(this).prop("checked") == false) {
+            console.log("Checkbox is unchecked.");
+            checkedArray = [];
+        }
+        console.log(checkedArray);
+    });
+
     $(".btn-tog-disable").change(function (e) {
         e.preventDefault();
         var userid = $(this).data("id");

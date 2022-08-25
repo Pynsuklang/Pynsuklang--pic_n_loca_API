@@ -11,7 +11,7 @@
                         <table class="table" id="mytabledis">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th><input type="checkbox" id="sel_usrs_all_dis" /></th>
                                     <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
