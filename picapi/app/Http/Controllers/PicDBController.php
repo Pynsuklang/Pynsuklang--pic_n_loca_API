@@ -56,7 +56,6 @@ class PicDBController extends Controller
             $pwd = $request->password;
             $cnt_user = ManageUser::where('user_email', $myusnm)
                 ->get(['user_password', 'id']);
-
             $signl = UserPermission::where('userid', $cnt_user[0]->id)->get(['permission_stats']);
             if ((count($cnt_user) == 1) && ($signl[0]->permission_stats == 1)) {
                 $hashedPassword = $cnt_user[0]->user_password;
@@ -65,7 +64,8 @@ class PicDBController extends Controller
                 } else {
                     $access = 1;
                 }
-            } else if ((count($cnt_user) == 1) && ($signl[0]->permission_stats == -1)) {
+            }
+            if ((count($cnt_user) == 1) && ($signl[0]->permission_stats == -1)) {
                 $access = 4;
             } else if (count($cnt_user) != 1) //account not available
             {

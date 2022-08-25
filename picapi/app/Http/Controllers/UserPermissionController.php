@@ -26,8 +26,15 @@ class UserPermissionController extends Controller
     public function UserPermissions(Request $request)
     {
         $sigs = $request->signal;
-        $userid = $request->userid;
-        UserPermission::where('userid', $userid)->update(array('permission_stats' => $sigs));
+        $userids = $request->userid;
+        $datatype = gettype($userids);
+        if ($datatype == "array") {
+            foreach ($userids as $userid) {
+                UserPermission::where('userid', $userid)->update(array('permission_stats' => $sigs));
+            }
+        } else {
+            UserPermission::where('userid', $userids)->update(array('permission_stats' => $sigs));
+        }
     }
 
     public function show(UserPermission $userPermission)

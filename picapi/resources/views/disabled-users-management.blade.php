@@ -8,9 +8,10 @@
                     <div class="card-body" style="overflow-x:auto;">
                         <h5 class="card-title">Disabled Users</h5>
                         <!-- Default Table -->
-                        <table class="table" id="mytable">
+                        <table class="table" id="mytabledis">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th scope="col">#</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
@@ -21,6 +22,7 @@
                             <tbody>
                                 @foreach ($users as $item)
                                     <tr>
+                                        <td><input type="checkbox" class="sel_usrs_dis" data-id="{{ $item->id }}"></td>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->user_name }}</td>
                                         <td>{{ $item->user_email }}</td>
@@ -33,6 +35,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                            <input name="btn_all_enab" id="btn_all_enab" type="button" value="Enable Selected">
                         </table>
                         <!-- End Default Table Example -->
                     </div>
