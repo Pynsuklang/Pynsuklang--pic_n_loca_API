@@ -283,13 +283,18 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
                     href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Management</span><i
+                    <i class="bi bi-menu-button-wide"></i><span>User Management</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('getusers') }}">
-                            <i class="bi bi-circle"></i><span>User Management</span>
+                        <a href="{{ route('disabled-users') }}">
+                            <i class="bi bi-circle"></i><span>Disabled User Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('enabled-users') }}">
+                            <i class="bi bi-circle"></i><span>Enabled User Management</span>
                         </a>
                     </li>
                 </ul>
@@ -319,7 +324,8 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/user-management.js') }}"></script>
+    <script src="{{ asset('js/users-management.js') }}"></script>
+
 </body>
 
 </html>

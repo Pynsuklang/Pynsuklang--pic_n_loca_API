@@ -14,14 +14,20 @@ class ManageUserController extends Controller
      */
     public function index()
     {
+    }
+    public function DisabledUserData()
+    {
         $users = ManageUser::leftJoin('user_permissions', 'manage_users.id', '=', 'user_permissions.userid')
             ->where('user_permissions.permission_stats', -1)
             ->get(['manage_users.id', 'manage_users.user_name', 'manage_users.user_email']);
-        return view('user-management', ['users' => $users]);
+        return view('disabled-users-management', ['users' => $users]);
     }
-    public function GetUserData()
+    public function EnabledUserData()
     {
-        return response()->json("OK", 200);
+        $users = ManageUser::leftJoin('user_permissions', 'manage_users.id', '=', 'user_permissions.userid')
+            ->where('user_permissions.permission_stats', 1)
+            ->get(['manage_users.id', 'manage_users.user_name', 'manage_users.user_email']);
+        return view('enabled-users-management', ['users' => $users]);
     }
     /**
      * Show the form for creating a new resource.
