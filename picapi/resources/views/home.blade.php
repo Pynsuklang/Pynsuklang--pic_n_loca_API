@@ -30,7 +30,7 @@
                                         <td><a href="https://maps.google.com/?q={{ $item->latitude_data }},{{ $item->longitude_data }}"
                                                 target="_blank">Get
                                                 Location</a></td>
-                                        <td><a href="/myfiles/{{ $item->file_location }}">Click Here To Download</a>
+                                        <td><a href="/myfiles/{{ $item->file_location }}" target="_blank">Click Here To Download</a>
                                         </td>
                                     </tr>
                                 @endforeach

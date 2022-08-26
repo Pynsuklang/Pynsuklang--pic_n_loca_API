@@ -111,24 +111,34 @@ class PicDBController extends Controller
             $lati = $request->latitude;
             $longi = $request->longitude;
             $emailid = $request->emailid;
+            $sigs = -1;
 
-            $f_trfare = $request->file('image');
-            $fileName1 = uniqid() . $f_trfare->getClientOriginalName();
-            $path2 = $path = public_path() . '/myfiles/';
-            $f_trfare->move($path, $fileName1);
-            $path2 = str_replace('/', "'\'", $path2);
-            $path2 = str_replace("'", "", $path2);
-            $usrid = ManageUser::where('user_email', $emailid)->get(['id']);
+            if ($request->hasFile('image')) {
+                $f_trfare = $request->file('image');
+                $fileName1 = $f_trfare->getClientOriginalName();
+                $path2 = $path = public_path() . '/myfiles/';
+                $f_trfare->move($path, $fileName1);
+                $path2 = str_replace('/', "'\'", $path2);
+                $path2 = str_replace("'", "", $path2);
+                $usrid = ManageUser::where('user_email', $emailid)->get(['id']);
+                $usrid = $usrid[0]->id;
 
-            $usrid = $usrid[0]->id;
+                $imgavl = PicDB::where('file_location', $fileName1)->count();
+                if ($imgavl >= 1) {
+                    $sigs = 5;
+                } else {
+                    $datas = new PicDB();
+                    $datas->latitude_data = $lati;
+                    $datas->longitude_data = $longi;
+                    $datas->userid = $usrid;
+                    $datas->file_location = $fileName1;
+                    $datas->save();
+                    $sigs = 1;
+                }
+            } else {
+                $sigs = 6;
+            }
 
-            $datas = new PicDB();
-            $datas->latitude_data = $lati;
-            $datas->longitude_data = $longi;
-            $datas->userid = $usrid;
-            $datas->file_location = $fileName1;
-            $datas->save();
-            $sigs = 1;
             return response()->json($sigs, 200);
         } catch (\Throwable $th) {
             $sigs = 0;
